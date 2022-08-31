@@ -1,128 +1,11 @@
-import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { colors } from "../config";
+import useCalculator from "../hooks/use-calculator";
 import { digits } from "../lib/digits";
-import { roundedValue } from "../lib/functions";
-import normalize from "../lib/normalize";
-import { Operator, valuesState } from "../lib/types";
 
 export default function Pad() {
-  const [values, setValues] = useState<valuesState>({
-    display: "",
-    waitingForOperand: true,
-    result: 0,
-    operator: undefined,
-    equation: "",
-  });
-
-  const handleAllFunctions = (type: string, value: any) => {
-    let tempValue: number = values.display
-      ? values.display.endsWith("%")
-        ? parseFloat(values.display) / 100
-        : Number(values.display)
-      : values.result;
-    let displayOperator: string;
-
-    switch (type) {
-      case "number":
-        setValues({ ...values, display: values.display.toString() + value });
-
-        if (values.waitingForOperand) {
-          setValues({
-            ...values,
-            display: values.display.toString() + value,
-            waitingForOperand: false,
-          });
-        }
-        break;
-      case "operator":
-        displayOperator =
-          ((value === "+" || value === "-") && value) ||
-          (value === "*" && "×") ||
-          (value === "/" && "÷");
-
-        if (typeof values.operator == "undefined") {
-          setValues({
-            ...values,
-            operator: value,
-            display: "",
-            waitingForOperand: false,
-            result: tempValue,
-            equation: roundedValue(tempValue, 3) + displayOperator,
-          });
-        } else if (values.waitingForOperand) {
-          let newEquation: string = values.equation.replace(/[+-×÷]$/g, "");
-          setValues({
-            ...values,
-            display: "",
-            operator: value,
-            equation: newEquation + displayOperator,
-          });
-        } else {
-          handleEquation(tempValue, value, displayOperator);
-        }
-        break;
-      case "equal":
-        !values.equation && values.operator === undefined
-          ? setValues({ ...values, result: tempValue })
-          : handleEquation(tempValue);
-        break;
-      case "clear":
-        setValues({
-          ...values,
-          display: "",
-          operator: undefined,
-          waitingForOperand: true,
-          result: 0,
-          equation: "",
-        });
-        break;
-      case "+/-":
-        values.display
-          ? setValues({ ...values, display: (-tempValue).toString() })
-          : setValues({ ...values, result: -values.result });
-        break;
-      case "percentage":
-        setValues({ ...values, display: tempValue.toString() + "%" });
-        break;
-    }
-  };
-
-  const handleEquation = (
-    tempValue: number,
-    operator?: Operator,
-    displayOperator?: string
-  ) => {
-    const handleOperator = (result: number) => {
-      setValues({
-        ...values,
-        display: "",
-        result: result,
-        operator: operator,
-        waitingForOperand: true,
-        equation:
-          values.equation +
-          tempValue +
-          (operator !== undefined ? displayOperator : ""),
-      });
-    };
-
-    switch (values.operator) {
-      case "+":
-        handleOperator(values.result + tempValue);
-        break;
-      case "-":
-        handleOperator(values.result - tempValue);
-        break;
-      case "*":
-        handleOperator(values.result * tempValue);
-        break;
-      case "/":
-        handleOperator(values.result / tempValue);
-        break;
-    }
-  };
+  const { values, handleAllFunctions, roundedValue } = useCalculator();
 
   return (
     <View style={[styles.container, styles.viewBottom]}>
@@ -130,7 +13,7 @@ export default function Pad() {
         <Text
           ellipsizeMode="head"
           numberOfLines={2}
-          style={[styles.resultText, { fontSize: normalize(50) }]}
+          style={[styles.resultText, { fontSize: 70 }]}
         >
           {values.equation}
           {values.display}
@@ -145,7 +28,7 @@ export default function Pad() {
           {roundedValue(values.result, 2)}
         </Text>
       </View>
-      {digits.map((digit: any, index: number) => (
+      {digits.map((digit, index) => (
         <TouchableOpacity
           key={index}
           style={[
@@ -156,7 +39,7 @@ export default function Pad() {
               : styles.accent,
             styles.digits,
           ]}
-          onPress={() => handleAllFunctions(digit.type, digit.value)}
+          onPress={() => handleAllFunctions(digit)}
         >
           <Text
             style={
