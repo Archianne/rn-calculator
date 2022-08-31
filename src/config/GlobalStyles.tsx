@@ -3,6 +3,18 @@ import { toggleTheme } from "./ThemeContext";
 
 export const styles = (isLight?: boolean) =>
   StyleSheet.create({
+    main: {
+      flex: 1,
+      backgroundColor: toggleTheme(isLight, "bg"),
+      alignItems: "center",
+      justifyContent: "flex-start",
+    },
+
+    menu: {
+      alignSelf: "flex-end",
+      margin: 25,
+    },
+
     container: {
       marginTop: 8,
       flexDirection: "row",

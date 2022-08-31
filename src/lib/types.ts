@@ -12,3 +12,7 @@ export type valuesState = {
   operator: Operator | undefined;
   equation: string;
 };
+export type PadValues = {
+  theme: boolean;
+  navigation: undefined;
+};
