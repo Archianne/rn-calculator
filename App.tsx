@@ -1,45 +1,39 @@
 import { useState } from "react";
 import { SafeAreaView, StyleSheet, Switch } from "react-native";
 import { Pad } from "./src/components";
-import { colors, ThemeContext } from "./src/config";
+import { ColorTheme, toggleTheme } from "./src/config";
 
 export default function App() {
-  const [theme, setTheme] = useState("light");
-  const isLight = theme === "light" ? true : false;
+  const [theme, setTheme] = useState(true);
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <SafeAreaView
-        style={
-          isLight
-            ? styles.container
-            : [styles.container, { backgroundColor: "black" }]
-        }
-      >
+    <ColorTheme theme={theme}>
+      <SafeAreaView style={styles(theme).container}>
         <Switch
-          value={theme === "dark"}
+          value={theme === false}
           trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isLight ? "#f5dd4b" : "#f4f3f4"}
-          onValueChange={() => setTheme(isLight ? "dark" : "light")}
-          style={styles.switch}
+          thumbColor={theme ? "#f5dd4b" : "#f4f3f4"}
+          onValueChange={() => setTheme(!theme)}
+          style={styles().switch}
         />
 
-        <Pad />
+        <Pad theme={theme} />
       </SafeAreaView>
-    </ThemeContext.Provider>
+    </ColorTheme>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.light,
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
+const styles = (isLight?: boolean) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: toggleTheme(isLight, "bg"),
+      alignItems: "center",
+      justifyContent: "flex-start",
+    },
 
-  switch: {
-    alignSelf: "flex-end",
-    margin: 25,
-  },
-});
+    switch: {
+      alignSelf: "flex-end",
+      margin: 25,
+    },
+  });

@@ -1,3 +1,4 @@
-export { default as colors } from "./Colors";
-export { default as ThemeContext } from "./ThemeContext";
-export { default as Styles } from "./GlobalStyles";
+export { ThemeContext } from "./ThemeContext";
+export { ColorTheme } from "./ThemeContext";
+export { toggleTheme } from "./ThemeContext";
+export { styles } from "./GlobalStyles";

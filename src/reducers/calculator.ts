@@ -1,6 +1,8 @@
-import { roundedValue } from "../hooks/use-calculator";
 import type { InputItem } from "../lib/digits";
 import type { Operator, valuesState } from "../lib/types";
+
+const roundedValue = (value: number, digits: number) =>
+  Math.round(value * 10 ** digits) / 10 ** digits;
 
 export default function reducer(
   prev: valuesState,
@@ -11,6 +13,8 @@ export default function reducer(
       ? parseFloat(prev.display) / 100
       : Number(prev.display)
     : prev.result;
+
+  console.log(prev);
 
   switch (action.type) {
     case "number":

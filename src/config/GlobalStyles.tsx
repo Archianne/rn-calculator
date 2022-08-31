@@ -1,73 +1,75 @@
 import { StyleSheet } from "react-native";
-import colors from "./Colors";
+import { toggleTheme } from "./ThemeContext";
 
-const Styles = StyleSheet.create({
-  // Button
-  btnBlue: {
-    width: 72,
-    height: 72,
-    borderRadius: 24,
-    backgroundColor: colors.blue,
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 8,
-  },
-  btnDark: {
-    width: 72,
-    height: 72,
-    borderRadius: 24,
-    backgroundColor: colors.btnDark,
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 8,
-  },
-  btnLight: {
-    width: 72,
-    height: 72,
-    borderRadius: 24,
-    backgroundColor: colors.white,
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 8,
-  },
-  btnGray: {
-    width: 72,
-    height: 72,
-    borderRadius: 24,
-    backgroundColor: colors.btnGray,
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 8,
-  },
-  smallTextLight: {
-    fontSize: 32,
-    color: colors.white,
-  },
-  smallTextDark: {
-    fontSize: 32,
-    color: colors.black,
-  },
-  // Keyboard
-  row: {
-    maxWidth: "100%",
-    flexDirection: "row",
-  },
-  viewBottom: {
-    position: "absolute",
-    bottom: 50,
-  },
-  screenFirstNumber: {
-    fontSize: 96,
-    color: colors.gray,
-    fontWeight: "200",
-    alignSelf: "flex-end",
-  },
-  screenSecondNumber: {
-    fontSize: 40,
-    color: colors.gray,
-    fontWeight: "200",
-    alignSelf: "flex-end",
-  },
-});
+export const styles = (isLight?: boolean) =>
+  StyleSheet.create({
+    container: {
+      marginTop: 8,
+      flexDirection: "row",
+      flexWrap: "wrap",
+      width: "90%",
+    },
 
-export default Styles;
+    smallTextDark: {
+      fontSize: 32,
+      color: "white",
+    },
+
+    number: {
+      backgroundColor: toggleTheme(isLight, "button"),
+    },
+
+    operators: {
+      backgroundColor: toggleTheme(isLight, "accent"),
+      color: "black",
+    },
+
+    secondary: {
+      backgroundColor: toggleTheme(isLight, "neutral"),
+    },
+
+    clear: {
+      backgroundColor: toggleTheme(isLight, "important"),
+    },
+
+    digits: {
+      flexGrow: 1,
+      flexShrink: 0,
+      flexBasis: "19%",
+      justifyContent: "center",
+      alignItems: "center",
+      width: 72,
+      height: 72,
+      margin: "2%",
+      borderRadius: 24,
+    },
+
+    smallTextLight: {
+      fontSize: 32,
+      color: toggleTheme(isLight, "text"),
+    },
+
+    viewBottom: {
+      position: "absolute",
+      bottom: 50,
+    },
+
+    display: {
+      width: "95%",
+    },
+
+    resultText: {
+      color: toggleTheme(isLight, "accent"),
+      fontWeight: "300",
+      alignSelf: "flex-end",
+      fontSize: 96,
+    },
+
+    equationText: {
+      fontSize: 50,
+      color: toggleTheme(isLight, "neutral"),
+      fontWeight: "300",
+      alignSelf: "flex-end",
+      paddingRight: 10,
+    },
+  });

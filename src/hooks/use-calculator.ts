@@ -2,10 +2,10 @@ import { useReducer } from "react";
 import type { InputItem } from "../lib/digits";
 import reducer from "../reducers/calculator";
 
-export const roundedValue = (value: number, digits: number) =>
+const roundedValue = (value: number, digits: number) =>
   Math.round(value * 10 ** digits) / 10 ** digits;
 
-export default function useCalculator() {
+export const useCalculator = () => {
   const [state, dispatch] = useReducer(reducer, {
     display: "",
     waitingForOperand: true,
@@ -23,4 +23,4 @@ export default function useCalculator() {
     handleAllFunctions,
     roundedValue,
   };
-}
+};
