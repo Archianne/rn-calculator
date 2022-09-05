@@ -3,7 +3,8 @@ import { styles } from "../config";
 import { useCalculator } from "../hooks/use-calculator";
 import { digits } from "../lib/digits";
 import { PadValues } from "../lib/types";
-import { Entypo } from "@expo/vector-icons";
+// import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Pad = ({ isLight, navigation }: PadValues) => {
   const { values, handleAllFunctions, roundedValue } = useCalculator();
@@ -29,7 +30,16 @@ const Pad = ({ isLight, navigation }: PadValues) => {
         style={styles().menu}
         onPress={() => navigation.navigate("Menu")}
       >
-        <Entypo name="menu" size={50} style={styles(isLight).menuIcon} />
+        {/* <Ionicons
+          name="settings-outline"
+          size={40}
+          style={styles(isLight).menuIcon}
+        /> */}
+        <MaterialCommunityIcons
+          name="settings-helper"
+          size={50}
+          style={styles(isLight).menuIcon}
+        />
       </TouchableOpacity>
 
       <View style={[styles().container, styles().viewBottom]}>

@@ -10,7 +10,7 @@ export const ColorTheme = (props: { theme: boolean; children: any }) => {
   );
 };
 
-export const toggleTheme = (isLight: any, object: any) => {
+export const toggleTheme = (isLight?: boolean, object?: string) => {
   return isLight ? lightMode[`${object}`] : darkMode[`${object}`];
 };
 
@@ -36,6 +36,6 @@ const darkMode = {
   button: "black",
   buttonFeedback: "#46D5B2",
   accent: "#46D5B2",
-  neutral: "#2E2F38",
+  neutral: "#51525b",
   toggle: "#F1F2F3",
 };

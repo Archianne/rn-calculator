@@ -12,14 +12,12 @@ export const styles = (isLight?: boolean) =>
 
     menu: {
       position: "absolute",
-      right: 0,
+      left: 0,
       paddingHorizontal: 20,
-      paddingTop: 10,
-     
     },
 
     menuIcon: {
-      color: toggleTheme(isLight, "accent"),
+      color: toggleTheme(isLight, "neutral"),
     },
 
     container: {
@@ -78,7 +76,7 @@ export const styles = (isLight?: boolean) =>
     },
 
     resultText: {
-      color: toggleTheme(isLight, "accent"),
+      color: toggleTheme(isLight, "text"),
       fontWeight: "300",
       alignSelf: "flex-end",
       fontSize: 96,
