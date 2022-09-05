@@ -1,18 +1,11 @@
-import {
-  Button,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../config";
 import { useCalculator } from "../hooks/use-calculator";
 import { digits } from "../lib/digits";
 import { PadValues } from "../lib/types";
+import { Entypo } from "@expo/vector-icons";
 
-const Pad = ({ theme, navigation }: PadValues) => {
-  let isLight = theme;
-  console.log(theme);
+const Pad = ({ isLight, navigation }: PadValues) => {
   const { values, handleAllFunctions, roundedValue } = useCalculator();
 
   const chooseButtonStyle = (type: string) => {
@@ -32,10 +25,13 @@ const Pad = ({ theme, navigation }: PadValues) => {
 
   return (
     <SafeAreaView style={styles(isLight).main}>
-      <Button
-        title="Go to Details"
+      <TouchableOpacity
+        style={styles().menu}
         onPress={() => navigation.navigate("Menu")}
-      />
+      >
+        <Entypo name="menu" size={50} style={styles(isLight).menuIcon} />
+      </TouchableOpacity>
+
       <View style={[styles().container, styles().viewBottom]}>
         <View style={styles().display}>
           <Text

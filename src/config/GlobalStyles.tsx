@@ -11,8 +11,15 @@ export const styles = (isLight?: boolean) =>
     },
 
     menu: {
-      alignSelf: "flex-end",
-      margin: 25,
+      position: "absolute",
+      right: 0,
+      paddingHorizontal: 20,
+      paddingTop: 10,
+     
+    },
+
+    menuIcon: {
+      color: toggleTheme(isLight, "accent"),
     },
 
     container: {
@@ -83,5 +90,43 @@ export const styles = (isLight?: boolean) =>
       fontWeight: "300",
       alignSelf: "flex-end",
       paddingRight: 10,
+    },
+  });
+
+export const menuStyles = (isLight?: boolean) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      marginTop: 20,
+      width: "100%",
+      alignItems: "flex-start",
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+    },
+
+    titleSeparator: {
+      borderBottomWidth: 1,
+      borderBottomColor: "#428947",
+      marginBottom: 20,
+      width: "100%",
+    },
+
+    title: {
+      fontSize: 25,
+      fontWeight: "500",
+      color: toggleTheme(isLight, "text"),
+    },
+
+    option: {
+      // backgroundColor: toggleTheme(!isLight, "bg"),
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "flex-start",
+    },
+
+    optionText: {
+      color: toggleTheme(isLight, "text"),
+      fontSize: 20,
     },
   });

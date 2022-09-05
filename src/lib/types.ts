@@ -13,6 +13,9 @@ export type valuesState = {
   equation: string;
 };
 export type PadValues = {
-  theme: boolean;
-  navigation: undefined;
+  changeTheme?: () => void;
+  withSwitch?: boolean;
+  isLight: boolean;
+  navigation?: any;
+  children?: any;
 };

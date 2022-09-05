@@ -24,6 +24,7 @@ const lightMode = {
   buttonFeedback: "#4B5EFC",
   accent: "#4B5EFC",
   neutral: "#878787",
+  toggle: "#4B5EFC",
 };
 
 const darkMode = {
@@ -36,4 +37,5 @@ const darkMode = {
   buttonFeedback: "#46D5B2",
   accent: "#46D5B2",
   neutral: "#2E2F38",
+  toggle: "#F1F2F3",
 };
