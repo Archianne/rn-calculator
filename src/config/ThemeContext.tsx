@@ -10,8 +10,29 @@ export const ColorTheme = (props: { theme: boolean; children: any }) => {
   );
 };
 
+// export const toggleTheme = (isLight?: boolean, object?: string) => {
+//   return isLight ? lightMode[`${object}`] : darkMode[`${object}`];
+// };
+
+function isPropertyOfLightMode(
+  property: any
+): property is keyof typeof lightMode {
+  return Object.hasOwn(lightMode, property);
+}
+
+function isPropertyOfDarkMode(
+  property: any
+): property is keyof typeof darkMode {
+  return Object.hasOwn(darkMode, property);
+}
+
 export const toggleTheme = (isLight?: boolean, object?: string) => {
-  return isLight ? lightMode[`${object}`] : darkMode[`${object}`];
+  const property = `${object}`;
+
+  if (isLight && isPropertyOfLightMode(property)) return lightMode[property];
+  else if (!isLight && isPropertyOfDarkMode(property))
+    return darkMode[property];
+  else throw new Error(`Invalid property ${property}`);
 };
 
 const lightMode = {

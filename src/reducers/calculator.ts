@@ -1,13 +1,13 @@
 import type { InputItem } from "../lib/digits";
-import type { Operator, valuesState } from "../lib/types";
+import type { Operator, ValuesState } from "../lib/types";
 
 const roundedValue = (value: number, digits: number) =>
   Math.round(value * 10 ** digits) / 10 ** digits;
 
 export default function reducer(
-  prev: valuesState,
+  prev: ValuesState,
   action: InputItem
-): valuesState {
+): ValuesState {
   const tempValue: number = prev.display
     ? prev.display.endsWith("%")
       ? parseFloat(prev.display) / 100
@@ -36,7 +36,7 @@ export default function reducer(
   }
 }
 
-export function handleNumber(prev: valuesState, item: InputItem): valuesState {
+export function handleNumber(prev: ValuesState, item: InputItem): ValuesState {
   if (prev.waitingForOperand)
     return {
       ...prev,
@@ -51,10 +51,10 @@ export function handleNumber(prev: valuesState, item: InputItem): valuesState {
 }
 
 export function handleOperator(
-  prev: valuesState,
+  prev: ValuesState,
   item: InputItem,
   tempValue: number
-): valuesState {
+): ValuesState {
   if ("operator" !== item.type) return prev;
 
   console.log(item);
@@ -84,18 +84,18 @@ export function handleOperator(
   else return handleEquation(prev, tempValue, item.value, displayOperator);
 }
 
-export function handleEqual(prev: valuesState, tempValue: number): valuesState {
+export function handleEqual(prev: ValuesState, tempValue: number): ValuesState {
   return !prev.equation && prev.operator === undefined
     ? { ...prev, result: tempValue }
     : handleEquation(prev, tempValue);
 }
 
 export function handleEquation(
-  prev: valuesState,
+  prev: ValuesState,
   tempValue: number,
   operator?: Operator,
   displayOperator?: string
-): valuesState {
+): ValuesState {
   const handleOperator = (result: number) => {
     return {
       ...prev,
@@ -125,7 +125,7 @@ export function handleEquation(
   }
 }
 
-export function handleClear(prev: valuesState): valuesState {
+export function handleClear(prev: ValuesState): ValuesState {
   return {
     ...prev,
     display: "",
@@ -137,14 +137,14 @@ export function handleClear(prev: valuesState): valuesState {
 }
 
 export function handlePlusOrMinus(
-  prev: valuesState,
+  prev: ValuesState,
   tempValue: number
-): valuesState {
+): ValuesState {
   return prev.display
     ? { ...prev, display: (-tempValue).toString() }
     : { ...prev, result: -prev.result };
 }
 
-export function handlePercentage(prev: valuesState, tempValue: number) {
+export function handlePercentage(prev: ValuesState, tempValue: number) {
   return { ...prev, display: tempValue.toString() + "%" };
 }
