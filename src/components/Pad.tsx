@@ -3,11 +3,16 @@ import { styles } from "../config";
 import { useCalculator } from "../hooks/use-calculator";
 import { digits } from "../lib/digits";
 import { PadValues } from "../lib/types";
-// import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTts } from "../hooks/use-tts";
+import { useEffect } from "react";
 
 const Pad = ({ isLight, navigation }: PadValues) => {
   const { values, handleAllFunctions, roundedValue } = useCalculator();
+
+  // if (!values.waitingForOperand && values.display.length > 0)
+  //   useTts(values.display);
+  // else if (values.waitingForOperand && values.operator) useTts(values.operator);
 
   const chooseButtonStyle = (type: string) => {
     switch (type) {
@@ -66,7 +71,9 @@ const Pad = ({ isLight, navigation }: PadValues) => {
           <TouchableOpacity
             key={index}
             style={[chooseButtonStyle(digit.type), styles(isLight).digits]}
-            onPress={() => handleAllFunctions(digit)}
+            onPress={() => {
+              handleAllFunctions(digit);
+            }}
           >
             <Text
               style={

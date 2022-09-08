@@ -1,3 +1,4 @@
+import { useTts } from "../hooks/use-tts";
 import type { InputItem } from "../lib/digits";
 import type { Operator, ValuesState } from "../lib/types";
 
@@ -14,7 +15,7 @@ export default function reducer(
       : Number(prev.display)
     : prev.result;
 
-  console.log(prev);
+  //console.log(prev);
 
   switch (action.type) {
     case "number":
@@ -37,13 +38,13 @@ export default function reducer(
 }
 
 export function handleNumber(prev: ValuesState, item: InputItem): ValuesState {
-  if (prev.waitingForOperand)
+  if (prev.waitingForOperand) {
     return {
       ...prev,
       display: prev.display + item.value,
       waitingForOperand: false,
     };
-  else
+  } else
     return {
       ...prev,
       display: prev.display + item.value,
@@ -70,7 +71,7 @@ export function handleOperator(
       ...prev,
       operator: item.value,
       display: "",
-      waitingForOperand: false,
+      waitingForOperand: true,
       result: tempValue,
       equation: roundedValue(tempValue, 3) + displayOperator,
     };

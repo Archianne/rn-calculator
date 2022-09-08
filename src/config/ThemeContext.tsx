@@ -15,15 +15,15 @@ export const ColorTheme = (props: { theme: boolean; children: any }) => {
 // };
 
 function isPropertyOfLightMode(
-  property: any
+  property: string
 ): property is keyof typeof lightMode {
-  return Object.hasOwn(lightMode, property);
+  return true;
 }
 
 function isPropertyOfDarkMode(
-  property: any
+  property: string
 ): property is keyof typeof darkMode {
-  return Object.hasOwn(darkMode, property);
+  return true;
 }
 
 export const toggleTheme = (isLight?: boolean, object?: string) => {
