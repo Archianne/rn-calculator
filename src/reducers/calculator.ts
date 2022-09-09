@@ -1,6 +1,8 @@
-import { useTts } from "../hooks/use-tts";
+import * as Speech from "expo-speech";
 import type { InputItem } from "../lib/digits";
 import type { Operator, ValuesState } from "../lib/types";
+import { useEffect, useState } from "react";
+import { useTts } from "../hooks/use-tts";
 
 const roundedValue = (value: number, digits: number) =>
   Math.round(value * 10 ** digits) / 10 ** digits;
@@ -58,7 +60,7 @@ export function handleOperator(
 ): ValuesState {
   if ("operator" !== item.type) return prev;
 
-  console.log(item);
+  //console.log(item);
 
   const displayOperator =
     ((item.value === "+" || item.value === "-") && item.value) ||
@@ -109,7 +111,6 @@ export function handleEquation(
         tempValue +
         (operator !== undefined ? displayOperator : ""),
     };
-    console.log(prev);
   };
 
   switch (prev.operator) {

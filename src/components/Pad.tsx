@@ -9,6 +9,9 @@ import { useEffect } from "react";
 
 const Pad = ({ isLight, navigation }: PadValues) => {
   const { values, handleAllFunctions, roundedValue } = useCalculator();
+  const [setItem] = useTts(values);
+
+  useEffect(() => console.log(values));
 
   // if (!values.waitingForOperand && values.display.length > 0)
   //   useTts(values.display);
@@ -73,6 +76,7 @@ const Pad = ({ isLight, navigation }: PadValues) => {
             style={[chooseButtonStyle(digit.type), styles(isLight).digits]}
             onPress={() => {
               handleAllFunctions(digit);
+              setItem(digit);
             }}
           >
             <Text
