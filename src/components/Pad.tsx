@@ -5,15 +5,10 @@ import { digits } from "../lib/digits";
 import { PadValues } from "../lib/types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTts } from "../hooks/use-tts";
-import { useEffect } from "react";
 
 const Pad = ({ isLight, navigation }: PadValues) => {
   const { values, handleAllFunctions, roundedValue } = useCalculator();
   const [setItem] = useTts(values);
-
-  // if (!values.waitingForOperand && values.display.length > 0)
-  //   useTts(values.display);
-  // else if (values.waitingForOperand && values.operator) useTts(values.operator);
 
   const chooseButtonStyle = (type: string) => {
     switch (type) {

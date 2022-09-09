@@ -1,6 +1,5 @@
 import * as Speech from "expo-speech";
 import { useEffect, useState } from "react";
-import { withSafeAreaInsets } from "react-native-safe-area-context";
 import { InputItem } from "../lib/digits";
 import { ValuesState } from "../lib/types";
 

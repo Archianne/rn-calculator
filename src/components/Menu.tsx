@@ -1,6 +1,5 @@
 import { styles, menuStyles, toggleTheme } from "../config";
 import { PadValues } from "../lib/types";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   SafeAreaView,
   Switch,
