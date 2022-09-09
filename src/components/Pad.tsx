@@ -1,14 +1,17 @@
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../config";
-import { useCalculator } from "../hooks/use-calculator";
+import { useCalculator } from "../hooks/useCalculator";
 import { digits } from "../lib/digits";
 import { PadValues } from "../lib/types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useTts } from "../hooks/use-tts";
+import { useTts } from "../hooks/useTts";
+import { useEffect } from "react";
 
-const Pad = ({ isLight, navigation }: PadValues) => {
+const Pad = ({ isLight, navigation, language }: PadValues) => {
   const { values, handleAllFunctions, roundedValue } = useCalculator();
-  const [setItem] = useTts(values);
+  const [setItem] = useTts(values, language);
+
+  useEffect(() => console.log(values));
 
   const chooseButtonStyle = (type: string) => {
     switch (type) {
@@ -31,11 +34,6 @@ const Pad = ({ isLight, navigation }: PadValues) => {
         style={styles().menu}
         onPress={() => navigation.navigate("Menu")}
       >
-        {/* <Ionicons
-          name="settings-outline"
-          size={40}
-          style={styles(isLight).menuIcon}
-        /> */}
         <MaterialCommunityIcons
           name="settings-helper"
           size={50}

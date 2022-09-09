@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useEffect, useState } from "react";
+import useAsyncStorage from "../hooks/useAsyncStorage";
 
 const Title = ({ children, isLight }: PadValues) => {
   return (
@@ -16,30 +18,59 @@ const Title = ({ children, isLight }: PadValues) => {
   );
 };
 
-const Options = ({ children, isLight, withSwitch, changeTheme }: PadValues) => {
+const Options = ({
+  children,
+  isLight,
+  switchValue,
+  withSwitch,
+  onSwitchValueChange,
+}: PadValues) => {
   return (
-    <TouchableOpacity style={menuStyles(isLight).option} onPress={changeTheme}>
+    <TouchableOpacity
+      style={menuStyles(isLight).option}
+      onPress={onSwitchValueChange}
+    >
       <Text style={menuStyles(isLight).optionText}>{children}</Text>
 
       {withSwitch && (
         <Switch
-          value={isLight === false}
+          value={switchValue}
           trackColor={{ false: "#767577", true: "#46D5B2" }}
           thumbColor={toggleTheme(isLight, "toggle")}
-          onValueChange={changeTheme}
+          onValueChange={onSwitchValueChange}
         />
       )}
     </TouchableOpacity>
   );
 };
 
-const Menu = ({ isLight, changeTheme }: PadValues) => {
+const Menu = ({ isLight, changeTheme, setLanguage, language }: PadValues) => {
+  const [langClick, setLangClick] = useAsyncStorage("boolean", false);
+
+  useEffect(() => {
+    langClick ? setLanguage("EN-uk") : setLanguage("PT-br");
+  }, [langClick]);
+
   return (
     <SafeAreaView style={styles(isLight).main}>
       <View style={menuStyles(isLight).container}>
         <Title isLight={isLight}>Preferences</Title>
-        <Options isLight={isLight} changeTheme={changeTheme} withSwitch>
+        <Options
+          isLight={isLight}
+          switchValue={!isLight}
+          onSwitchValueChange={changeTheme}
+          withSwitch
+        >
           Change theme
+        </Options>
+
+        <Options
+          isLight={isLight}
+          switchValue={langClick}
+          onSwitchValueChange={() => setLangClick(!langClick)}
+          withSwitch
+        >
+          Language
         </Options>
       </View>
     </SafeAreaView>

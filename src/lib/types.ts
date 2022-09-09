@@ -16,8 +16,12 @@ export type ValuesState = {
 };
 export type PadValues = {
   changeTheme?: () => void;
+  onSwitchValueChange?: () => void;
   withSwitch?: boolean;
-  isLight: boolean;
+  switchValue?: boolean;
+  isLight?: boolean;
   navigation?: any;
   children?: any;
+  setLanguage?: any;
+  language?: string;
 };
