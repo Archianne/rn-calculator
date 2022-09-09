@@ -12,6 +12,7 @@ export const useCalculator = () => {
     result: 0,
     operator: undefined,
     equation: "",
+    pressedEqual: false,
   });
 
   const handleAllFunctions = (item: InputItem) => {

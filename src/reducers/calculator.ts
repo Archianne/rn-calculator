@@ -1,8 +1,5 @@
-import * as Speech from "expo-speech";
 import type { InputItem } from "../lib/digits";
 import type { Operator, ValuesState } from "../lib/types";
-import { useEffect, useState } from "react";
-import { useTts } from "../hooks/use-tts";
 
 const roundedValue = (value: number, digits: number) =>
   Math.round(value * 10 ** digits) / 10 ** digits;
@@ -40,6 +37,14 @@ export default function reducer(
 }
 
 export function handleNumber(prev: ValuesState, item: InputItem): ValuesState {
+  if (prev.pressedEqual) {
+    return {
+      ...prev,
+      equation: "",
+      display: item.value.toString(),
+      pressedEqual: false,
+    };
+  }
   if (prev.waitingForOperand) {
     return {
       ...prev,
@@ -74,6 +79,7 @@ export function handleOperator(
       operator: item.value,
       display: "",
       waitingForOperand: true,
+      pressedEqual: false,
       result: tempValue,
       equation: roundedValue(tempValue, 3) + displayOperator,
     };
@@ -82,6 +88,7 @@ export function handleOperator(
       ...prev,
       display: "",
       operator: item.value,
+      pressedEqual: false,
       equation: prev.equation.replace(/[+-×÷]$/g, displayOperator),
     };
   else return handleEquation(prev, tempValue, item.value, displayOperator);
@@ -90,14 +97,15 @@ export function handleOperator(
 export function handleEqual(prev: ValuesState, tempValue: number): ValuesState {
   return !prev.equation && prev.operator === undefined
     ? { ...prev, result: tempValue }
-    : handleEquation(prev, tempValue);
+    : handleEquation(prev, tempValue, undefined, "", true);
 }
 
 export function handleEquation(
   prev: ValuesState,
   tempValue: number,
   operator?: Operator,
-  displayOperator?: string
+  displayOperator?: string,
+  pressedEqual?: boolean
 ): ValuesState {
   const handleOperator = (result: number) => {
     return {
@@ -106,6 +114,7 @@ export function handleEquation(
       result: result,
       operator: operator,
       waitingForOperand: true,
+      pressedEqual: pressedEqual,
       equation:
         prev.equation +
         tempValue +

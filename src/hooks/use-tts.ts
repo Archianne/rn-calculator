@@ -1,22 +1,36 @@
 import * as Speech from "expo-speech";
 import { useEffect, useState } from "react";
+import { withSafeAreaInsets } from "react-native-safe-area-context";
+import { InputItem } from "../lib/digits";
+import { ValuesState } from "../lib/types";
 
 export const useTts = (values: any) => {
-  const [item, setItem] = useState("");
+  let operatorWord: string;
+  const [item, setItem] = useState({} as InputItem);
   const [speak, setSpeak] = useState("");
 
-  //  item: { type: "delete", value: "del", title: "⌫" },
+  // console.log(item);
+  // item: { type: "delete", value: "del", title: "⌫" },
+
+  function defineSpeechForOperator(values: ValuesState) {
+    if (values.operator === "+") operatorWord = "Plus";
+    if (values.operator === "-") operatorWord = "Minus";
+    if (values.operator === "*") operatorWord = "Times";
+    if (values.operator === "/") operatorWord = "Divided by";
+
+    values.pressedEqual
+      ? setSpeak("equals" + values.result + ". " + operatorWord)
+      : setSpeak(values.result + operatorWord);
+  }
 
   function getItem(item: any) {
+    console.log(values);
     switch (item.type) {
       case "number":
-        setSpeak(values.display);
+        setSpeak(item.title);
         break;
       case "operator":
-        if (values.operator === "+") setSpeak("plus");
-        if (values.operator === "-") setSpeak("minus");
-        if (values.operator === "*") setSpeak("times");
-        if (values.operator === "/") setSpeak("divided by");
+        defineSpeechForOperator(values);
         break;
       case "+/-":
         setSpeak(values.display);
@@ -24,47 +38,21 @@ export const useTts = (values: any) => {
       case "percentage":
         break;
       case "equal":
-        setSpeak("equals" + values.result);
+        if (values.result < 0) setSpeak("equals minus" + values.result);
+        else setSpeak("equals" + values.result);
         break;
       default:
         break;
     }
   }
 
-  useEffect(() => getItem(item), [values.display]);
+  useEffect(() => getItem(item), [values]);
 
   const options = {
     language: "EN-uk",
   };
 
-  // useEffect(() => setSpeak(values.display), [values.display]);
   useEffect(() => Speech.speak(speak, options), [speak]);
 
   return [setItem];
-
-  //if (action.type === "number") Speech.speak(values.display, options);
-
-  // if (!values.waitingForOperand && values.display.length > 0)
-  //   useTts(values.display);
-  // else if (values.waitingForOperand && values.operator) useTts(values.operator);
-
-  //   if (action === "=") Speech.speak("=", options);
-
-  //   if (values.waitingForOperand && values.operator) {
-  //     Speech.speak(values.operator, options);
-  //   } else if (!values.waitingForOperand && values.display.length > 0) {
-  //     Speech.speak(values.display, options);
-  //   }
 };
-
-// export const useTts = (textOnDisplay: string) => {
-//   useEffect(() => {
-//     console.log(textOnDisplay);
-//   }, [textOnDisplay]);
-
-//   const options = {
-//     language: "EN-uk",
-//   };
-
-//   Speech.speak(textOnDisplay, options);
-// };

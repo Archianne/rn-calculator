@@ -12,6 +12,7 @@ export type ValuesState = {
   result: number;
   operator: Operator | undefined;
   equation: string;
+  pressedEqual?: boolean;
 };
 export type PadValues = {
   changeTheme?: () => void;
