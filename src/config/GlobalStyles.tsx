@@ -94,10 +94,8 @@ export const styles = (isLight?: boolean) =>
 export const menuStyles = (isLight?: boolean) =>
   StyleSheet.create({
     container: {
-      flex: 1,
       marginTop: 20,
       width: "100%",
-      alignItems: "flex-start",
       paddingHorizontal: 20,
       paddingVertical: 20,
     },
@@ -121,6 +119,7 @@ export const menuStyles = (isLight?: boolean) =>
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "flex-start",
+      marginVertical: 10,
     },
 
     optionText: {

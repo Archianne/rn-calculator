@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useAsyncStorage from "../hooks/useAsyncStorage";
 
 const Title = ({ children, isLight }: PadValues) => {
@@ -44,7 +44,13 @@ const Options = ({
   );
 };
 
-const Menu = ({ isLight, changeTheme, setLanguage, language }: PadValues) => {
+const Menu = ({
+  isLight,
+  changeTheme,
+  setLanguage,
+  language,
+  setCustomAccent,
+}: PadValues) => {
   const [langClick, setLangClick] = useAsyncStorage("boolean", false);
 
   useEffect(() => {
@@ -53,6 +59,26 @@ const Menu = ({ isLight, changeTheme, setLanguage, language }: PadValues) => {
 
   return (
     <SafeAreaView style={styles(isLight).main}>
+      <View style={menuStyles(isLight).container}>
+        <Title isLight={isLight}>Preferences</Title>
+        <Options
+          isLight={isLight}
+          switchValue={!isLight}
+          onSwitchValueChange={changeTheme}
+          withSwitch
+        >
+          Change theme
+        </Options>
+
+        <Options
+          isLight={isLight}
+          switchValue={langClick}
+          onSwitchValueChange={() => setLangClick(!langClick)}
+          withSwitch
+        >
+          Language
+        </Options>
+      </View>
       <View style={menuStyles(isLight).container}>
         <Title isLight={isLight}>Preferences</Title>
         <Options

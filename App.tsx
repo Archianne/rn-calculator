@@ -9,14 +9,17 @@ import { useColorScheme } from "react-native";
 export default function App() {
   const Stack = createNativeStackNavigator();
   let defaultTheme = useColorScheme();
-  const [theme, setTheme] = useState(defaultTheme === "light" ? true : false);
-  const [language, setLanguage, retrivedFromStorage] = useAsyncStorage(
-    "language",
-    "PT-br"
+  const [theme, setTheme] = useAsyncStorage(
+    "theme",
+    defaultTheme === "light" ? true : false
   );
   const [customAccent, setCustomAccent] = useAsyncStorage(
     "customAccent",
     toggleTheme(theme, "accent")
+  );
+  const [language, setLanguage, retrivedFromStorage] = useAsyncStorage(
+    "language",
+    "PT-br"
   );
 
   console.log(retrivedFromStorage, language);
@@ -29,7 +32,7 @@ export default function App() {
             name="Calculator"
             options={{
               headerStyle: {
-                backgroundColor: toggleTheme(theme, "accent"),
+                backgroundColor: customAccent,
               },
               headerTintColor: toggleTheme(theme, "bg"),
             }}
@@ -40,7 +43,7 @@ export default function App() {
             name="Menu"
             options={{
               headerStyle: {
-                backgroundColor: toggleTheme(theme, "accent"),
+                backgroundColor: customAccent,
               },
               headerTintColor: toggleTheme(theme, "bg"),
             }}
@@ -51,6 +54,7 @@ export default function App() {
                 isLight={theme}
                 changeTheme={() => setTheme(!theme)}
                 setLanguage={setLanguage}
+                setCustomAccent={setCustomAccent}
                 language={language}
               />
             )}

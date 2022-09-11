@@ -24,4 +24,5 @@ export type PadValues = {
   children?: any;
   setLanguage?: any;
   language?: string;
+  setCustomAccent?: any;
 };
