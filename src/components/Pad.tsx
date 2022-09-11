@@ -1,13 +1,14 @@
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-import { styles } from "../config";
+import { styles, toggleTheme } from "../config";
 import { useCalculator } from "../hooks/useCalculator";
 import { digits } from "../lib/digits";
 import { PadValues } from "../lib/types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTts } from "../hooks/useTts";
 import { useEffect } from "react";
+import useAsyncStorage from "../hooks/useAsyncStorage";
 
-const Pad = ({ isLight, navigation, language }: PadValues) => {
+const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
   const { values, handleAllFunctions, roundedValue } = useCalculator();
   const [setItem] = useTts(values, language);
 
@@ -16,9 +17,15 @@ const Pad = ({ isLight, navigation, language }: PadValues) => {
   const chooseButtonStyle = (type: string) => {
     switch (type) {
       case "operator":
-        return styles(isLight).operators;
+        return {
+          backgroundColor: customAccent,
+          color: "black",
+        };
       case "equal":
-        return styles(isLight).operators;
+        return {
+          backgroundColor: customAccent,
+          color: "black",
+        };
       case "number":
         return styles(isLight).number;
       case "clear":

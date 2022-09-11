@@ -22,7 +22,7 @@ export default function App() {
     "PT-br"
   );
 
-  console.log(retrivedFromStorage, language);
+  console.log(customAccent, language);
 
   return (
     <ColorTheme theme={theme}>
@@ -37,7 +37,14 @@ export default function App() {
               headerTintColor: toggleTheme(theme, "bg"),
             }}
           >
-            {(props) => <Pad {...props} isLight={theme} language={language} />}
+            {(props) => (
+              <Pad
+                {...props}
+                isLight={theme}
+                language={language}
+                customAccent={customAccent}
+              />
+            )}
           </Stack.Screen>
           <Stack.Screen
             name="Menu"
@@ -55,6 +62,7 @@ export default function App() {
                 changeTheme={() => setTheme(!theme)}
                 setLanguage={setLanguage}
                 setCustomAccent={setCustomAccent}
+                customAccent={customAccent}
                 language={language}
               />
             )}

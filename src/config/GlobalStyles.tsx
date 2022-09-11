@@ -36,11 +36,6 @@ export const styles = (isLight?: boolean) =>
       backgroundColor: toggleTheme(isLight, "button"),
     },
 
-    operators: {
-      backgroundColor: toggleTheme(isLight, "accent"),
-      color: "black",
-    },
-
     secondary: {
       backgroundColor: toggleTheme(isLight, "neutral"),
     },
@@ -125,5 +120,19 @@ export const menuStyles = (isLight?: boolean) =>
     optionText: {
       color: toggleTheme(isLight, "text"),
       fontSize: 20,
+    },
+
+    colors: {
+      flex: 1,
+      flexDirection: "row",
+      flexWrap: "wrap",
+    },
+
+    colourButton: {
+      backgroundColor: "red",
+      width: 60,
+      height: 60,
+      borderRadius: 50,
+      margin: 10,
     },
   });
