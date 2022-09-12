@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { styles, menuStyles, toggleTheme } from "../config";
-import { PadValues } from "../lib/types";
+import { PadValues, colors } from "../lib";
+import { useAsyncStorage } from "../hooks";
 import {
   SafeAreaView,
   Switch,
@@ -8,8 +9,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import useAsyncStorage from "../hooks/useAsyncStorage";
-import { colors } from "../lib/colors";
 
 const Title = ({ children, isLight }: PadValues) => {
   return (
@@ -37,7 +36,10 @@ const Options = ({
       {withSwitch && (
         <Switch
           value={switchValue}
-          trackColor={{ false: "#767577", true: "#b0b0b0" }}
+          trackColor={{
+            false: toggleTheme(isLight, "neutral"),
+            true: toggleTheme(isLight, "toggle"),
+          }}
           thumbColor={customAccent}
           onValueChange={onSwitchValueChange}
         />

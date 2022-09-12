@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const useAsyncStorage = <T>(key: string, initialValue: T) => {
+export const useAsyncStorage = <T>(key: string, initialValue: T) => {
   const [data, setData] = useState<T>(initialValue);
   const [retrivedFromStorage, setRetrievedFromStorage] = useState(false);
 
@@ -28,4 +28,3 @@ const useAsyncStorage = <T>(key: string, initialValue: T) => {
 
   return [data, setNewData, retrivedFromStorage] as const;
 };
-export default useAsyncStorage;

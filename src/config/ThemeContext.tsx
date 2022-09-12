@@ -1,5 +1,4 @@
-import { createContext, useEffect, useState } from "react";
-import { useColorScheme } from "react-native";
+import { createContext } from "react";
 export const ThemeContext = createContext(true);
 
 //if true: light mode //if false: dark mode
@@ -10,10 +9,6 @@ export const ColorTheme = (props: { theme: boolean; children: any }) => {
     </ThemeContext.Provider>
   );
 };
-
-// export const toggleTheme = (isLight?: boolean, object?: string) => {
-//   return isLight ? lightMode[`${object}`] : darkMode[`${object}`];
-// };
 
 function isPropertyOfLightMode(
   property: string
@@ -34,11 +29,6 @@ export const toggleTheme = (isLight?: boolean, object?: string) => {
   else if (!isLight && isPropertyOfDarkMode(property))
     return darkMode[property];
   else throw new Error(`Invalid property ${property}`);
-
-  // if (isLight && isPropertyOfLightMode(property)) return lightMode[property];
-  // else if (!isLight && isPropertyOfDarkMode(property))
-  //   return darkMode[property];
-  // else throw new Error(`Invalid property ${property}`);
 };
 
 const lightMode = {
@@ -51,7 +41,7 @@ const lightMode = {
   buttonFeedback: "#4B5EFC",
   accent: "#4B5EFC",
   neutral: "#878787",
-  toggle: "#4B5EFC",
+  toggle: "#d5d5d5",
 };
 
 const darkMode = {
@@ -64,5 +54,5 @@ const darkMode = {
   buttonFeedback: "#46D5B2",
   accent: "#46D5B2",
   neutral: "#51525b",
-  toggle: "#F1F2F3",
+  toggle: "#292a2e",
 };

@@ -1,18 +1,14 @@
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-import { styles, toggleTheme } from "../config";
-import { useCalculator } from "../hooks/useCalculator";
-import { digits } from "../lib/digits";
-import { PadValues } from "../lib/types";
+import { useCalculator, useTts } from "../hooks";
+import { styles } from "../config";
+import { digits, PadValues } from "../lib";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useTts } from "../hooks/useTts";
-import { useEffect } from "react";
-import useAsyncStorage from "../hooks/useAsyncStorage";
 
 const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
   const { values, handleAllFunctions, roundedValue } = useCalculator();
   const [setItem] = useTts(values, language);
 
-  useEffect(() => console.log(values));
+  // useEffect(() => console.log(values));
 
   const chooseButtonStyle = (type: string) => {
     switch (type) {

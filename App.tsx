@@ -1,10 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { useState } from "react";
 import { Menu, Pad } from "./src/components";
 import { ColorTheme, toggleTheme } from "./src/config";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import useAsyncStorage from "./src/hooks/useAsyncStorage";
 import { useColorScheme } from "react-native";
+import { useAsyncStorage } from "./src/hooks";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -17,12 +16,7 @@ export default function App() {
     "customAccent",
     toggleTheme(theme, "accent")
   );
-  const [language, setLanguage, retrivedFromStorage] = useAsyncStorage(
-    "language",
-    "PT-br"
-  );
-
-  console.log(customAccent, language);
+  const [language, setLanguage] = useAsyncStorage("language", "PT-br");
 
   return (
     <ColorTheme theme={theme}>

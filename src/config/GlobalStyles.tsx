@@ -37,7 +37,7 @@ export const styles = (isLight?: boolean) =>
     },
 
     secondary: {
-      backgroundColor: toggleTheme(isLight, "neutral"),
+      backgroundColor: toggleTheme(isLight, "toggle"),
     },
 
     clear: {
