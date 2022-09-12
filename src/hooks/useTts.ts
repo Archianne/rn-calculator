@@ -43,7 +43,6 @@ export const useTts = (values: any, language?: string, volume?: boolean) => {
 
     switch (item.type) {
       case "number":
-
         setSpeak(values.display);
         break;
       case "operator":
@@ -66,15 +65,15 @@ export const useTts = (values: any, language?: string, volume?: boolean) => {
             defineTextToRead("equals minus", "é igual a menos") + fixedValue
           );
         else setSpeak(defineTextToRead("equals ", "é igual a ") + fixedValue);
-
         break;
+      case "clear":
+        Speech.stop();
       default:
-  
         break;
     }
   }
 
-  useEffect(() => getItem(item), [values]);
+  useEffect(() => getItem(item), [values.display]);
 
   useEffect(() => {
     volume &&
