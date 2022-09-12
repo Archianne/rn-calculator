@@ -30,6 +30,8 @@ export default function reducer(
       return handlePlusOrMinus(prev, tempValue);
     case "percentage":
       return handlePercentage(prev, tempValue);
+    case "delete":
+      return handleDelete(prev);
     default:
       console.warn("Unhandled action", action);
       console.warn("Returning existing state (unmodified)");
@@ -59,6 +61,9 @@ export function handleNumber(prev: ValuesState, item: InputItem): ValuesState {
     };
 }
 
+export function handleDelete(prev: ValuesState): ValuesState {
+  return { ...prev, display: prev.display.slice(0, -1) };
+}
 export function handleOperator(
   prev: ValuesState,
   item: InputItem,

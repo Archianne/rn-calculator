@@ -98,6 +98,12 @@ export const styles = (isLight?: boolean) =>
 
 export const menuStyles = (isLight?: boolean) =>
   StyleSheet.create({
+    main: {
+      flex: 1,
+      backgroundColor: toggleTheme(isLight, "bg"),
+      maxWidth: "100%",
+    },
+
     container: {
       marginTop: 20,
       width: "100%",
@@ -136,6 +142,7 @@ export const menuStyles = (isLight?: boolean) =>
       flex: 1,
       flexDirection: "row",
       flexWrap: "wrap",
+      justifyContent: "center",
     },
 
     colourButton: {
@@ -143,6 +150,6 @@ export const menuStyles = (isLight?: boolean) =>
       width: 60,
       height: 60,
       borderRadius: 50,
-      margin: 10,
+      margin: 12,
     },
   });

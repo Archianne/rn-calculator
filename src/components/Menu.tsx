@@ -4,6 +4,7 @@ import { PadValues, colors } from "../lib";
 import { useAsyncStorage } from "../hooks";
 import {
   SafeAreaView,
+  ScrollView,
   Switch,
   Text,
   TouchableOpacity,
@@ -77,35 +78,36 @@ const Menu = ({
 
   return (
     <SafeAreaView style={styles(isLight).main}>
-      <View style={menuStyles(isLight).container}>
-        <Title isLight={isLight}>{langClick ? "Language" : "Idioma"}</Title>
-
-        <Options
-          isLight={isLight}
-          switchValue={langClick}
-          customAccent={customAccent}
-          onSwitchValueChange={() => setLangClick(!langClick)}
-          withSwitch
-        >
-          {langClick ? "English" : "Português"}
-        </Options>
-      </View>
-      <View style={menuStyles(isLight).container}>
-        <Title isLight={isLight}>{langClick ? "Theme" : "Tema"}</Title>
-        <Options
-          isLight={isLight}
-          switchValue={!isLight}
-          customAccent={customAccent}
-          onSwitchValueChange={changeTheme}
-          withSwitch
-        >
-          {langClick ? "Change Theme" : "Troque o tema"}
-        </Options>
-      </View>
-      <View style={menuStyles(isLight).container}>
-        <Title isLight={isLight}>{langClick ? "Colours" : "Cores"}</Title>
-        <PickColour isLight={isLight} setCustomAccent={setCustomAccent} />
-      </View>
+      <ScrollView style={menuStyles(isLight).main}>
+        <View style={menuStyles(isLight).container}>
+          <Title isLight={isLight}>{langClick ? "Language" : "Idioma"}</Title>
+          <Options
+            isLight={isLight}
+            switchValue={langClick}
+            customAccent={customAccent}
+            onSwitchValueChange={() => setLangClick(!langClick)}
+            withSwitch
+          >
+            {langClick ? "English" : "Português"}
+          </Options>
+        </View>
+        <View style={menuStyles(isLight).container}>
+          <Title isLight={isLight}>{langClick ? "Theme" : "Tema"}</Title>
+          <Options
+            isLight={isLight}
+            switchValue={!isLight}
+            customAccent={customAccent}
+            onSwitchValueChange={changeTheme}
+            withSwitch
+          >
+            {langClick ? "Change Theme" : "Troque o tema"}
+          </Options>
+        </View>
+        <View style={menuStyles(isLight).container}>
+          <Title isLight={isLight}>{langClick ? "Colours" : "Cores"}</Title>
+          <PickColour isLight={isLight} setCustomAccent={setCustomAccent} />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
