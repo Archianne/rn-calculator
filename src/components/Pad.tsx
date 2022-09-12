@@ -3,13 +3,14 @@ import { useCalculator, useTts } from "../hooks";
 import { styles } from "../config";
 import { digits, PadValues } from "../lib";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
   const { values, handleAllFunctions, roundedValue } = useCalculator();
-  const [setItem] = useTts(values, language);
+  const [volume, setVolume] = useState(true);
+  const [setItem] = useTts(values, language, volume);
 
-  useEffect(() => console.log(values));
+  //useEffect(() => console.log(volume));
 
   const chooseButtonStyle = (type: string) => {
     switch (type) {
@@ -43,6 +44,14 @@ const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
           size={50}
           style={styles(isLight).menuIcon}
         />
+        {/* //volume */}
+        <TouchableOpacity onPress={() => setVolume(!volume)}>
+          <MaterialCommunityIcons
+            name="settings-helper"
+            size={50}
+            style={styles(isLight).menuIcon}
+          />
+        </TouchableOpacity>
       </TouchableOpacity>
 
       <View style={[styles().container, styles().viewBottom]}>
@@ -71,7 +80,7 @@ const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
             style={[chooseButtonStyle(digit.type), styles(isLight).digits]}
             onPress={() => {
               handleAllFunctions(digit);
-              // setItem(digit);
+              setItem(digit);
             }}
           >
             <Text

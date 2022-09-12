@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { InputItem } from "../lib/digits";
 import { ValuesState } from "../lib/types";
 
-export const useTts = (values: any, language?: string) => {
+export const useTts = (values: any, language?: string, volume?: boolean) => {
   const [item, setItem] = useState({} as InputItem);
   const [speak, setSpeak] = useState("");
 
@@ -80,7 +80,9 @@ export const useTts = (values: any, language?: string) => {
     language: language,
   };
 
-  useEffect(() => Speech.speak(speak, options), [speak]);
+  useEffect(() => {
+    volume && Speech.speak(speak, options);
+  }, [speak, volume]);
 
   return [setItem];
 };

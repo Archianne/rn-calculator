@@ -11,6 +11,10 @@ export const styles = (isLight?: boolean) =>
     },
 
     menu: {
+      flex: 1,
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "space-between",
       position: "absolute",
       left: 0,
       paddingHorizontal: 20,
