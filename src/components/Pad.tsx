@@ -2,7 +2,7 @@ import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { useCalculator, useTts } from "../hooks";
 import { styles } from "../config";
 import { digits, PadValues } from "../lib";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 
 const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
@@ -46,11 +46,19 @@ const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
         />
         {/* //volume */}
         <TouchableOpacity onPress={() => setVolume(!volume)}>
-          <MaterialCommunityIcons
-            name="settings-helper"
-            size={50}
-            style={styles(isLight).menuIcon}
-          />
+          {volume ? (
+            <Feather
+              name="volume-2"
+              size={42}
+              style={[styles(isLight).volumeIcon, { color: customAccent }]}
+            />
+          ) : (
+            <Feather
+              name="volume"
+              size={40}
+              style={styles(isLight).volumeIcon}
+            />
+          )}
         </TouchableOpacity>
       </TouchableOpacity>
 

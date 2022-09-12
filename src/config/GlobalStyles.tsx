@@ -13,7 +13,7 @@ export const styles = (isLight?: boolean) =>
     menu: {
       flex: 1,
       width: "100%",
-      flexDirection: "row",
+      flexDirection: "row-reverse",
       justifyContent: "space-between",
       position: "absolute",
       left: 0,
@@ -21,6 +21,12 @@ export const styles = (isLight?: boolean) =>
     },
 
     menuIcon: {
+      color: toggleTheme(isLight, "neutral"),
+    },
+
+    volumeIcon: {
+      marginTop: 25,
+      marginLeft: 5,
       color: toggleTheme(isLight, "neutral"),
     },
 

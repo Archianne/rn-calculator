@@ -55,6 +55,7 @@ const PickColour = ({ isLight, setCustomAccent }: PadValues) => {
         <TouchableOpacity
           style={[menuStyles(isLight).colourButton, { backgroundColor: color }]}
           onPress={() => setCustomAccent(color)}
+          key={color}
         />
       ))}
     </View>
