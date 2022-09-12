@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { InputItem } from "../lib/digits";
 import type { Operator, ValuesState } from "../lib/types";
 
@@ -157,5 +158,16 @@ export function handlePlusOrMinus(
 }
 
 export function handlePercentage(prev: ValuesState, tempValue: number) {
-  return { ...prev, display: tempValue.toString() + "%" };
+  let fixedTempValue: number | string = prev.pressedEqual
+    ? prev.result
+    : tempValue;
+
+  if (tempValue.toString().includes("."))
+    fixedTempValue = fixedTempValue.toFixed(3);
+  else fixedTempValue = fixedTempValue;
+
+  // return { ...prev, display: fixedTempValue + "%" };
+  if (prev.pressedEqual)
+    return { ...prev, equation: "", display: tempValue + "%" };
+  else return { ...prev, display: tempValue + "%" };
 }

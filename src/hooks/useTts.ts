@@ -56,18 +56,18 @@ export const useTts = (values: any, language?: string) => {
       case "percentage":
         break;
       case "equal":
-        if (values.result.toString().includes(".")) {
-          fixedValue = values.result.toFixed(2).replace(/\./g, defineTextToRead("point", "ponto"));
-        } else {
-          fixedValue = values.result;
-        }
+        if (values.result.toString().includes("."))
+          fixedValue = values.result
+            .toFixed(3)
+            .replace(/\./g, defineTextToRead("point", "ponto"));
+        else fixedValue = values.result;
 
         if (values.result < 0)
           setSpeak(
             defineTextToRead("equals minus", "é igual a menos") + fixedValue
           );
         else setSpeak(defineTextToRead("equals ", "é igual a ") + fixedValue);
-       
+
         break;
       default:
         break;

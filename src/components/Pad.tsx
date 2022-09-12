@@ -3,12 +3,13 @@ import { useCalculator, useTts } from "../hooks";
 import { styles } from "../config";
 import { digits, PadValues } from "../lib";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useEffect } from "react";
 
 const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
   const { values, handleAllFunctions, roundedValue } = useCalculator();
   const [setItem] = useTts(values, language);
 
-  // useEffect(() => console.log(values));
+  useEffect(() => console.log(values));
 
   const chooseButtonStyle = (type: string) => {
     switch (type) {
@@ -61,7 +62,7 @@ const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
             numberOfLines={1}
             ellipsizeMode="head"
           >
-            {roundedValue(values.result, 2)}
+            {roundedValue(values.result, 3)}
           </Text>
         </View>
         {digits.map((digit, index) => (
@@ -70,7 +71,7 @@ const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
             style={[chooseButtonStyle(digit.type), styles(isLight).digits]}
             onPress={() => {
               handleAllFunctions(digit);
-              setItem(digit);
+              // setItem(digit);
             }}
           >
             <Text
