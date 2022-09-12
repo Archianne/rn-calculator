@@ -10,7 +10,7 @@ const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
   const [volume, setVolume] = useState(true);
   const [setItem] = useTts(values, language, volume);
 
-  //useEffect(() => console.log(volume));
+  //useEffect(() => console.log("Values", values), [values]);
 
   const chooseButtonStyle = (type: string) => {
     switch (type) {
@@ -35,32 +35,37 @@ const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
 
   return (
     <SafeAreaView style={styles(isLight).main}>
-      <TouchableOpacity
-        style={styles().menu}
-        onPress={() => navigation.navigate("Menu")}
-      >
-        <MaterialCommunityIcons
-          name="settings-helper"
-          size={50}
-          style={styles(isLight).menuIcon}
-        />
+      <View style={styles().menu}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Menu")}
+          style={{ paddingHorizontal: 20 }}
+        >
+          <MaterialCommunityIcons
+            name="settings-helper"
+            size={50}
+            style={styles(isLight).menuIcon}
+          />
+        </TouchableOpacity>
         {/* //volume */}
-        <TouchableOpacity onPress={() => setVolume(!volume)}>
+        <TouchableOpacity
+          onPress={() => setVolume(!volume)}
+          style={{ paddingHorizontal: 20 }}
+        >
           {volume ? (
             <Feather
               name="volume-2"
-              size={42}
+              size={35}
               style={[styles(isLight).volumeIcon, { color: customAccent }]}
             />
           ) : (
             <Feather
               name="volume"
-              size={40}
+              size={35}
               style={styles(isLight).volumeIcon}
             />
           )}
         </TouchableOpacity>
-      </TouchableOpacity>
+      </View>
 
       <View style={[styles().container, styles().viewBottom]}>
         <View style={styles().display}>

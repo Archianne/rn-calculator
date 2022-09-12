@@ -17,7 +17,7 @@ export const styles = (isLight?: boolean) =>
       justifyContent: "space-between",
       position: "absolute",
       left: 0,
-      paddingHorizontal: 20,
+      paddingHorizontal: 10,
     },
 
     menuIcon: {

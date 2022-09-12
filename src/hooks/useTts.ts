@@ -8,7 +8,7 @@ export const useTts = (values: any, language?: string, volume?: boolean) => {
   const [speak, setSpeak] = useState("");
 
   function defineTextToRead(en: string, pt: string) {
-    if (language === "EN-uk") return en;
+    if (language === "EN-gb") return en;
     else if (language === "PT-br") return pt;
     else return "";
   }
@@ -33,8 +33,6 @@ export const useTts = (values: any, language?: string, volume?: boolean) => {
         break;
     }
 
-    console.log(values);
-
     values.pressedEqual
       ? setSpeak("equals" + values.result + ". " + operatorWord)
       : setSpeak(operatorWord);
@@ -45,6 +43,7 @@ export const useTts = (values: any, language?: string, volume?: boolean) => {
 
     switch (item.type) {
       case "number":
+
         setSpeak(values.display);
         break;
       case "operator":
@@ -70,18 +69,18 @@ export const useTts = (values: any, language?: string, volume?: boolean) => {
 
         break;
       default:
+  
         break;
     }
   }
 
   useEffect(() => getItem(item), [values]);
 
-  const options = {
-    language: language,
-  };
-
   useEffect(() => {
-    volume && Speech.speak(speak, options);
+    volume &&
+      Speech.speak(speak, {
+        language: language,
+      });
   }, [speak, volume]);
 
   return [setItem];

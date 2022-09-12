@@ -4,6 +4,7 @@ import { ColorTheme, toggleTheme } from "./src/config";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useColorScheme } from "react-native";
 import { useAsyncStorage } from "./src/hooks";
+import * as SplashScreen from "expo-splash-screen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -17,6 +18,9 @@ export default function App() {
     toggleTheme(theme, "accent")
   );
   const [language, setLanguage] = useAsyncStorage("language", "PT-br");
+
+  SplashScreen.preventAutoHideAsync();
+  setTimeout(SplashScreen.hideAsync, 5000);
 
   return (
     <ColorTheme theme={theme}>
