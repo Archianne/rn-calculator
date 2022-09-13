@@ -46,7 +46,7 @@ const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
             style={styles(isLight).menuIcon}
           />
         </TouchableOpacity>
-        {/* //volume */}
+
         <TouchableOpacity
           onPress={() => setVolume(!volume)}
           style={{ paddingHorizontal: 20 }}
@@ -80,7 +80,7 @@ const Pad = ({ isLight, navigation, language, customAccent }: PadValues) => {
         </View>
         <View style={styles(isLight).display}>
           <Text
-            style={styles(isLight).resultText}
+            style={[styles(isLight).resultText]}
             numberOfLines={1}
             ellipsizeMode="head"
           >

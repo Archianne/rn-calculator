@@ -20,7 +20,7 @@ export default function App() {
   const [language, setLanguage] = useAsyncStorage("language", "PT-br");
 
   SplashScreen.preventAutoHideAsync();
-  setTimeout(SplashScreen.hideAsync, 5000);
+  setTimeout(SplashScreen.hideAsync, 4000);
 
   return (
     <ColorTheme theme={theme}>

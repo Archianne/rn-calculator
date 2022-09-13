@@ -8,25 +8,31 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.gif",
-      "resizeMode": "contain",
-      "backgroundColor": "#333"
+      "resizeMode": "cover",
+      "backgroundColor": "#fff"
     },
-
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.archianne.calculator"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/splash.gif",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#333"
-      }
+      },
+      "package": "com.archianne.calculator"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "60b1596e-f6aa-4b30-b7f5-dba1d3e1bbea"
+      }
     }
   }
 }

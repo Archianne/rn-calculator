@@ -1,22 +1,24 @@
 import * as Speech from "expo-speech";
 import { useEffect, useState } from "react";
 import { InputItem } from "../lib/digits";
-import { ValuesState } from "../lib/types";
+import { Operator } from "../lib/types";
 
 export const useTts = (values: any, language?: string, volume?: boolean) => {
   const [item, setItem] = useState({} as InputItem);
   const [speak, setSpeak] = useState("");
+  //useEffect(() => console.log(speak));
 
   function defineTextToRead(en: string, pt: string) {
+    // console.log(language);
     if (language === "EN-gb") return en;
     else if (language === "PT-br") return pt;
     else return "";
   }
 
-  function defineSpeechForOperator(values: ValuesState) {
+  function defineSpeechForOperator(operator: Operator) {
     let operatorWord: string = "";
 
-    switch (values.operator) {
+    switch (operator) {
       case "+":
         operatorWord = defineTextToRead("Plus", "Mais");
         break;
@@ -38,7 +40,7 @@ export const useTts = (values: any, language?: string, volume?: boolean) => {
       : setSpeak(operatorWord);
   }
 
-  function getItem(item: any) {
+  function getItem(item: InputItem) {
     let fixedValue: string;
 
     switch (item.type) {
@@ -46,7 +48,7 @@ export const useTts = (values: any, language?: string, volume?: boolean) => {
         setSpeak(values.display);
         break;
       case "operator":
-        defineSpeechForOperator(values);
+        defineSpeechForOperator(values.operator);
         break;
       case "+/-":
         setSpeak(values.display);
@@ -73,7 +75,7 @@ export const useTts = (values: any, language?: string, volume?: boolean) => {
     }
   }
 
-  useEffect(() => getItem(item), [values.display]);
+  useEffect(() => getItem(item), [values]);
 
   useEffect(() => {
     volume &&

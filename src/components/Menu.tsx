@@ -73,7 +73,7 @@ const Menu = ({
   const [langClick, setLangClick] = useAsyncStorage("boolean", false);
 
   useEffect(() => {
-    langClick ? setLanguage("EN-uk") : setLanguage("PT-br");
+    langClick ? setLanguage("EN-gb") : setLanguage("PT-br");
   }, [langClick]);
 
   return (

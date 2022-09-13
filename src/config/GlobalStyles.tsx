@@ -84,11 +84,11 @@ export const styles = (isLight?: boolean) =>
       color: toggleTheme(isLight, "text"),
       fontWeight: "300",
       alignSelf: "flex-end",
-      fontSize: 96,
+      fontSize: 70,
     },
 
     equationText: {
-      fontSize: 50,
+      fontSize: 45,
       color: toggleTheme(isLight, "neutral"),
       fontWeight: "300",
       alignSelf: "flex-end",
