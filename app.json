@@ -2,12 +2,20 @@
   "expo": {
     "name": "calculator",
     "slug": "calculator",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
+    "plugins": [
+      [
+        "expo-ads-admob",
+        {
+          "userTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+        }
+      ]
+    ],
     "splash": {
-      "image": "./assets/splash.gif",
+      "image": "./assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#fff"
     },
@@ -17,12 +25,20 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.archianne.calculator"
+      "bundleIdentifier": "com.archianne.calculator",
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-2230756139193855~5158498030"
+      }
     },
+    "package": "com.archianne.calculator",
+    "versionCode": 1,
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#333"
+      },
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-2230756139193855~5158498030"
       },
       "package": "com.archianne.calculator"
     },
