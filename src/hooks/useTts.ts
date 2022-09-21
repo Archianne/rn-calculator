@@ -6,7 +6,7 @@ import { Operator } from "../lib/types";
 export const useTts = (values: any, language?: string, volume?: boolean) => {
   const [item, setItem] = useState({} as InputItem);
   const [speak, setSpeak] = useState("");
-  //useEffect(() => console.log(speak));
+  useEffect(() => console.log(speak));
 
   function defineTextToRead(en: string, pt: string) {
     // console.log(language);
