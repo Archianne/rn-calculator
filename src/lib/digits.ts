@@ -1,7 +1,7 @@
 export let digits = [
   { type: "clear", value: "C", title: "AC" },
   { type: "+/-", value: "+/-", title: "±" },
-  { type: "percentage", value: "%", title: "﹪" },
+  { type: "percentage", value: "%", title: "％" },
   { type: "operator", value: "/", title: "÷" },
   { type: "number", value: 7, title: "7" },
   { type: "number", value: 8, title: "8" },
@@ -18,7 +18,7 @@ export let digits = [
   { type: "number", value: ".", title: "." },
   { type: "number", value: 0, title: "0" },
   { type: "delete", value: "del", title: "⌫" },
-  { type: "equal", value: "=", title: "=" },
+  { type: "equal", value: "=", title: "＝" },
 ] as const;
 
 export type InputItem = typeof digits[number];

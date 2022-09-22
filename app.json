@@ -2,7 +2,7 @@
   "expo": {
     "name": "calculator",
     "slug": "calculator",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -32,7 +32,6 @@
     },
     "android": {
       "package": "com.archianne.calculator",
-      "versionCode": "2.1.1",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#333"
